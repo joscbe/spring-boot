@@ -4,6 +4,7 @@ import jakarta.persistence.*
 import java.time.LocalDateTime
 
 @Entity
+//@Table(name = "topico")
 data class Topico(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null,
@@ -17,5 +18,6 @@ data class Topico(
     val resposta: List<Resposta> = ArrayList(),
     val createdAt: LocalDateTime = LocalDateTime.now(),
     @ManyToOne
+    @JoinColumn(name = "created_by")
     val createdBy: Usuario
 )

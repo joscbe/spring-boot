@@ -1,13 +1,10 @@
 package br.com.alura.forum.model
 
-import jakarta.persistence.Entity
-import jakarta.persistence.GeneratedValue
-import jakarta.persistence.GenerationType
-import jakarta.persistence.Id
-import jakarta.persistence.ManyToOne
+import jakarta.persistence.*
 import java.time.LocalDateTime
 
 @Entity
+//@Table(name = "resposta")
 data class Resposta(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
@@ -17,5 +14,6 @@ data class Resposta(
     val topico: Topico,
     val createdAt: LocalDateTime = LocalDateTime.now(),
     @ManyToOne
+    @JoinColumn(name = "created_by")
     val createdBy: Usuario
 )
