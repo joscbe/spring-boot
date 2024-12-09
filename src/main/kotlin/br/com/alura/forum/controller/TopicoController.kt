@@ -6,6 +6,9 @@ import br.com.alura.forum.dto.UpdateTopicoForm
 import br.com.alura.forum.model.Topico
 import br.com.alura.forum.service.TopicoService
 import jakarta.validation.Valid
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
+import org.springframework.data.web.PageableDefault
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.transaction.annotation.Transactional
@@ -28,9 +31,11 @@ class TopicoController(private val service: TopicoService) {
     @GetMapping
     fun getTopicos(
         @RequestParam(required = false)
-        nomeCurso: String?
-    ): List<TopicoView> {
-        return service.getTopicos(nomeCurso)
+        nomeCurso: String?,
+        @PageableDefault(size = 5)
+        paginacao: Pageable
+    ): Page<TopicoView> {
+        return service.getTopicos(nomeCurso, paginacao)
     }
 
     @GetMapping("/{id}")
