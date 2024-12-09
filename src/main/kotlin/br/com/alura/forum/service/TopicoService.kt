@@ -20,8 +20,14 @@ class TopicoService(
     private val notFoundMessage: String = "asdasdasdasd"
 ) {
 
-    fun getTopicos(): List<TopicoView> {
-        return repository.findAll().stream().map {
+    fun getTopicos(nomeCurso: String?): List<TopicoView> {
+        val topicos = if (nomeCurso == null) {
+            repository.findAll()
+        } else {
+            repository.findByCursoNome(nomeCurso)
+        }
+
+        return topicos.stream().map {
             topico -> topicoViewMapper.map(topico)
         }.collect(Collectors.toList())
     }
