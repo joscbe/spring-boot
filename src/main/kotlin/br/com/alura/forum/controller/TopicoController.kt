@@ -1,9 +1,9 @@
 package br.com.alura.forum.controller
 
 import br.com.alura.forum.dto.NewTopicoForm
+import br.com.alura.forum.dto.TopicoPorCategoriaDto
 import br.com.alura.forum.dto.TopicoView
 import br.com.alura.forum.dto.UpdateTopicoForm
-import br.com.alura.forum.model.Topico
 import br.com.alura.forum.service.TopicoService
 import jakarta.validation.Valid
 import org.springframework.cache.annotation.CacheEvict
@@ -15,16 +15,7 @@ import org.springframework.data.web.PageableDefault
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.transaction.annotation.Transactional
-import org.springframework.web.bind.annotation.DeleteMapping
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.PutMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestParam
-import org.springframework.web.bind.annotation.ResponseStatus
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 import org.springframework.web.util.UriComponentsBuilder
 
 @RestController
@@ -45,6 +36,11 @@ class TopicoController(private val service: TopicoService) {
     @GetMapping("/{id}")
     fun getTopicoById(@PathVariable id: Long): TopicoView {
         return service.getTopicoById(id)
+    }
+
+    @GetMapping("/relatorio")
+    fun relatorio(): List<TopicoPorCategoriaDto> {
+        return service.relatorio()
     }
 
     @PostMapping
