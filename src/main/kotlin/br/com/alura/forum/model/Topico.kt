@@ -1,6 +1,7 @@
 package br.com.alura.forum.model
 
 import jakarta.persistence.*
+import java.time.LocalDate
 import java.time.LocalDateTime
 
 @Entity
@@ -19,5 +20,6 @@ data class Topico(
     val createdAt: LocalDateTime = LocalDateTime.now(),
     @ManyToOne
     @JoinColumn(name = "created_by")
-    val createdBy: Usuario
+    val createdBy: Usuario,
+    var updatedAt: LocalDate? = null
 )

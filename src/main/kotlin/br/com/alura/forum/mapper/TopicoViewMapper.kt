@@ -13,7 +13,8 @@ class TopicoViewMapper: Mapper<Topico, TopicoView> {
             title = t.title,
             message = t.message,
             status = t.status,
-            createdAt = t.createdAt
+            createdAt = t.createdAt,
+            updatedAt = t.updatedAt
         )
     }
 }

@@ -11,7 +11,7 @@ import br.com.alura.forum.repository.TopicoRepository
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
-import java.util.stream.Collectors
+import java.time.LocalDate
 
 @Service
 class TopicoService(
@@ -31,8 +31,8 @@ class TopicoService(
             repository.findByCursoNome(nomeCurso, paginacao)
         }
 
-        return topicos.map {
-            topico -> topicoViewMapper.map(topico)
+        return topicos.map { topico ->
+            topicoViewMapper.map(topico)
         }
     }
 
@@ -55,6 +55,7 @@ class TopicoService(
 
         topico.title = form.title
         topico.message = form.message
+        topico.updatedAt = LocalDate.now()
 
         return topicoViewMapper.map(topico)
     }
