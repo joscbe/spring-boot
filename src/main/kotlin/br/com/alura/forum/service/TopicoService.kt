@@ -18,7 +18,7 @@ class TopicoService(
     private val repository: TopicoRepository,
     private val topicoViewMapper: TopicoViewMapper,
     private val topicoFormMapper: TopicoFormMapper,
-    private val notFoundMessage: String = "asdasdasdasd"
+    private val notFoundMessage: String = "Topico não encontrado!"
 ) {
 
     fun getTopicos(
@@ -37,7 +37,7 @@ class TopicoService(
     }
 
     fun getTopicoById(id: Long): TopicoView {
-        val topico = repository.findById(id).orElseThrow { NotFoundException("O topico ${id} não foi encontrado!") }
+        val topico = repository.findById(id).orElseThrow { NotFoundException(notFoundMessage) }
 
         return topicoViewMapper.map(topico)
     }
